@@ -10,7 +10,7 @@
 <script type="text/javascript" src="/js/jquery-3.4.1.min.js" ></script>
 <script type="text/javascript" src="/js/bootstrap.js"></script>
 <link rel="stylesheet" href="/css/w3.css" >
-<c:if test="${not empty SID}">
+<c:if test="${not empty sid}">
 	<meta http-equiv="Refresh" content="3 ;url=/" />
 </c:if>
 <style>
@@ -39,27 +39,27 @@
 						data-toggle="dropdown" role="button" aria-haspopup="ture"
 						aria-expanded="false">접속하기<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li class="active"><a href="login.jsp">로그인</a></li>
-						<li><a href="join.jsp">회원가입</a></li>
+						<li class="active"><a href="/member/login.cls">로그인</a></li>
+						<li><a href="member/join.cls">회원가입</a></li>
 					</ul>
 				</li>
 			</ul>
 		</div>
 	</nav>
-	<c:if test="${empty SID}">
+	<c:if test="${empty sid}">
 	<div class="container">
 		<div class="col-lg-4"></div>
 		<div class="col-lg-4">
 			<div class="jumbotron" style="padding-top:20px;">
-				<form method="post" action="/member/LoginExec.nop">
+				<form method="post" action="/member/loginProc.cls">
 					<h3 style="text-align:center;">로그인 화면</h3>
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="아이디" 
-							   name="userID" maxlength="20">
+							   name="id" maxlength="20">
 					</div>
 					<div class="form-group">
 						<input type="password" class="form-control" placeholder="비밀번호" 
-							   name="userPassword" maxlength="20">
+							   name="pw" maxlength="20">
 					</div>
 					<input type="submit" class="btn btn-primary form-control" value="로그인">
 				</form>
@@ -69,7 +69,7 @@
 	</div>
 	</c:if>
 	
-	<c:if test="${not empty SID}">
+	<c:if test="${not empty sid}">
 		<div class="w3-col m6 w3-center" id="d1">
 			<h3>${SID} 님은 이미로그인 했습니다.</h3>
 			<h6>메인 페이지로 이동합니다.</h6>

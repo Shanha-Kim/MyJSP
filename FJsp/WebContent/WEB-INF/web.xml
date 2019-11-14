@@ -13,5 +13,14 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/
 		<servlet-name>Login</servlet-name>
 		<url-pattern>/member/login.nop</url-pattern>
 	</servlet-mapping>
-
+	
+	<servlet>
+		<servlet-name>Main</servlet-name>
+		<servlet-class>main.MainCont</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Main</servlet-name>
+		<url-pattern>/main</url-pattern>
+	</servlet-mapping>
 </web-app>
