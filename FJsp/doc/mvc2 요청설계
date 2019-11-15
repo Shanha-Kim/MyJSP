@@ -36,8 +36,19 @@
 	컨트롤러	:	com.koitt.www.controller.member.MemberInfo
 	뷰			:	무
 	
+4. 회원가입 폼 요청
+	요청내용	:	/member/joinForm.cls
+	파라미터	:	무
+	데이터타입	: 	무
+	컨트롤러	:	com.koitt.www.controller.member.LoginForm
+	뷰			:	무
 
-
+5. 회원가입 처리 요청
+	요청내용	:	/member/joinProc.cls
+	파라미터	:	userID, userPW, userName, userTel, userEmail
+	데이터타입	: 	string
+	컨트롤러	:	com.koitt.www.controller.member.MemberInfo
+	뷰			:	무
 
 	
 	
@@ -47,3 +58,27 @@
 	파라미터	:
 	컨트롤러	:
 	뷰	
+
+==============================================================================
+파일업로드 게시판 관련 요청
+
+1. 게시판 뷰 요청
+	요청내용	:	/board/boardList.cls
+	파라미터	:	무
+	컨트롤러	:	com.koitt.www.controller.board.BoardListForm
+	뷰			:	/com/temp/test1/board/boardList.jsp
+
+2. 게시판 입력 폼 요청
+	요청내용	:	/board/boardWrite.cls
+	파라미터	:	무
+	컨트롤러	:	com.koitt.www.controller.board.BoardWriteForm
+	뷰			:	/com/temp/test1/board/boardWrite.jsp
+	
+2. 게시판 입력 처리 요청
+	요청내용	:	/board/boardWriteProc.cls
+	파라미터	:	sid, title, body, check
+	컨트롤러	:	com.koitt.www.controller.board.BoardWriteProc
+	뷰			:	실패 - /com/temp/test1/board/boardList.jsp
+					성공 - /com/temp/test1/board/boardList.jsp
+					
+					

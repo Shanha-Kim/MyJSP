@@ -31,7 +31,7 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="/">메인</a>
-				<li><a href="/">게시판</a>
+				<li><a href="/board/boardList.cls">게시판</a>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
@@ -70,8 +70,9 @@
 	</c:if>
 	
 	<c:if test="${not empty sid}">
+		<div class="w3-col m3"><p></p></div>
 		<div class="w3-col m6 w3-center" id="d1">
-			<h3>${SID} 님은 이미로그인 했습니다.</h3>
+			<h3>${sid} 님은 이미로그인 했습니다.</h3>
 			<h6>메인 페이지로 이동합니다.</h6>
 		</div>
 	</c:if>

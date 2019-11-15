@@ -14,7 +14,6 @@ package com.koitt.www.dao;
  */
 
 import DB.*;
-import sql.BBSSQL;
 
 import com.koitt.www.sql.*;
 import com.koitt.www.vo.*;
@@ -63,38 +62,29 @@ public class MemberDAO {
 			db.close(pstmt);
 			db.close(con);
 		}
-		System.out.println("DB오류");
-		return cnt; //DB오류
+		return cnt;
 	}
-	// 아이디체크 전담 처리함수
-//		public int getIdCnt(String sid) {
-//			int cnt = 0 ;
-//			// 커넥션 얻어오고
-//			con = db.getCon();
-//			// 질의 명령 가져오고
-//			mSQL = new MemberSQL();
-//			String sql = mSQL.getSQL(mSQL.SEL_ID_CK);
-//			// PreparedStatement 가져오고
-//			pstmt = db.getPSTMT(con, sql);
-//			
-//			try {
-//				// 질의명령 완성하고
-//				pstmt.setString(1, sid);
-//				// 질의명령 보내고 결과 받고
-//				rs = pstmt.executeQuery();
-//				// 데이터 꺼내고
-//				rs.next();
-//				cnt = rs.getInt("cnt");
-//			} catch(Exception e) {
-//				e.printStackTrace();
-//			} finally {
-//				db.close(rs);
-//				db.close(pstmt);
-//				db.close(con);
-//			}
-//			
-//			return cnt;
-//		}
+	 //아이디체크 전담 처리함수
+		public int idCheck(String sid) {
+			int cnt = 0 ;
+			con = db.getCon();
+			String sql = mSQL.getSQL(mSQL.IDCHECK);
+			pstmt = db.getPSTMT(con, sql);
+			try {
+				pstmt.setString(1, sid);
+				rs = pstmt.executeQuery();
+				rs.next();
+				cnt = rs.getInt("cnt");
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+				db.close(rs);
+				db.close(pstmt);
+				db.close(con);
+			}
+			
+			return cnt;
+		}
 		public MemberVO getMemberInfo(String sid) {
 			vo = new MemberVO();
 			//할일
@@ -130,7 +120,56 @@ public class MemberDAO {
 			
 			return vo;
 		}
-		
+		public int join(MemberVO vo) {
+			con = db.getCon();
+			String sql = mSQL.getSQL(mSQL.JOIN);
+			pstmt = db.getPSTMT(con, sql);
+			try {
+				pstmt.setString(1, vo.getM_id());
+				pstmt.setString(2, vo.getM_pw());
+				pstmt.setString(3, vo.getM_name());
+				pstmt.setString(4, vo.getM_email());
+				pstmt.setString(5, vo.getM_tel());
+				return pstmt.executeUpdate();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					db.close(pstmt);
+					db.close(con);
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			return -1;
+		}
+		public int modify(String sid, String target, String check) {
+			int a = 0 ;
+			con = db.getCon();
+			String sql = null;
+			if(check.equals("1")) {
+				sql = mSQL.getSQL(mSQL.MODIFY_MAIL);
+			}else {
+				sql = mSQL.getSQL(mSQL.MODIFY_TEL);
+			}
+			System.out.println(sql);
+			pstmt = db.getPSTMT(con, sql);
+			try {
+				pstmt.setString(1, target);
+				pstmt.setString(2, sid);
+				System.out.println(target);
+				System.out.println(sid);
+				a = pstmt.executeUpdate();
+				System.out.println(a);
+				return a;
+			}catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				db.close(pstmt);
+				db.close(con);
+			}
+			return -1; //DB오류
+		}
 		
 		public ArrayList<MemberVO> getUser() {
 			con = db.getCon();

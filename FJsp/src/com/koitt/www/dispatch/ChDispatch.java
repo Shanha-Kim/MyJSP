@@ -133,6 +133,4 @@ public class ChDispatch extends HttpServlet {
 			rd.forward(req, resp);
 		}
 	}
-	
-	
 }

@@ -26,8 +26,8 @@
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="main.jsp">메인</a>
-				<li><a href="bbs.jsp">게시판</a>
+				<li><a href="/">메인</a>
+				<li><a href="/board/boardList.cls">게시판</a>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown">
@@ -35,8 +35,8 @@
 						data-toggle="dropdown" role="button" aria-haspopup="ture"
 						aria-expanded="false">접속하기<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="login.jsp">로그인</a></li>
-						<li class="active"><a href="join.jsp">회원가입</a></li>
+						<li><a href="/member/login.cls">로그인</a></li>
+						<li class="active"><a href="/member/join.cls">회원가입</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -62,13 +62,12 @@
 							$('#btn').click(function(){
 								var sid = $('#id').val();
 								$.ajax({
-									url : "/member/IdCheck.ck",
+									url : "/member/idCheck.cls",
 									type : "post",
 									dataType : "json",
 									data : {
 										id : sid
 									},
-									
 									success : function(data){
 										var ck = data.cnt;
 										if(ck == 1){
@@ -91,7 +90,7 @@
 					</script>
 					<div class="form-group">
 						<label>비밀번호</label>
-						<input type="password" class="form-control" placeholder="비밀번호" name="userPassword" maxlength="20" id="pwd1">
+						<input type="password" class="form-control" placeholder="비밀번호" name="userPW" maxlength="20" id="pwd1">
 					</div>
 					<div class="form-group">
 						<label>비밀번호 확인</label>
@@ -134,7 +133,7 @@
 						<label>이메일</label>
 						<input type="email" class="form-control" placeholder="이메일" name="userEmail" maxlength="20">
 					</div>
-					<input type="submit" class="btn btn-primary form-control" value="회원가입">
+					<input type="submit" class="btn btn-primary form-control" value="회원가입" id="submit">
 				</form>
 			</div>
 		</div>

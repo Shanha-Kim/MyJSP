@@ -47,8 +47,88 @@
 				}
 			});
 		});
-		$('#btn2').click(function(){
+		$('#btn').click(function(){
 			$('#detail').css('display', 'none');
+		});
+	//==========================회원정보 수정=======================================
+		$('#modi11').click(function(){
+
+			var tid = '${sid}';
+			var mail = $('#newmail').val();
+			var check2 = "1";
+			$.ajax({
+				url : "/member/membmodify.ck",
+				type : "post",
+				dataType : "json",
+				data : {
+					mid : tid,
+					str : mail,
+					check : check2
+				},
+				success : function(data){
+					alert("success");
+					if(data.result==1){
+						alert("회원정보가 수정되었습니다.");
+						$('#mmail').html(mail);
+						$("#newmail").css("display", "none");
+						$("#modi11").css("display", "none");
+						$("#mmail").css("display", "block");
+						$("#modi1").css("display", "block");
+					}else{
+						alert("수정 실패")
+					}
+				},
+				error : function(requst, status, error){
+					alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+				}
+			});
+		});
+		$('#modi22').click(function(){
+
+			var tid = '${sid}';
+			var mtel = $('#newtel').val();
+			var check2 = "2";
+			
+			$.ajax({
+				url : "/member/membmodify.ck",
+				type : "post",
+				dataType : "json",
+				data : {
+					mid : tid,
+					str : mtel,
+					check : check2
+				},
+				success : function(data){
+					alert("success");
+					if(data.result==1){
+						alert("회원정보가 수정되었습니다.");
+						alert(mtel);
+						$('#mtel').html(mtel);
+						$("#newtel").css("display", "none");
+						$("#modi22").css("display", "none");
+						$("#mtel").css("display", "block");
+						$("#modi2").css("display", "block");
+					}else{
+						alert("수정 실패")
+					}
+				},
+				error : function(requst, status, error){
+					alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+				}
+			});
+		});
+	//=========================일반 스크립트===========================
+		$("#modi1").click(function(){
+			$("#mmail").css("display", "none");
+			$("#newmail").css("display", "block");
+			$(this).css("display","none");
+			$("#modi11").css("display", "block");
+		});
+		$("#modi2").click(function(){
+			$("#mtel").css("display", "none");
+			$("#newtel").css("display", "block");
+			$(this).css("display","none");
+			$("#modi22").css("display", "block");
 		});
 	});
 </script>
@@ -70,7 +150,7 @@
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="main.jsp">메인</a>
-				<li><a href="bbs.jsp">게시판</a>
+				<li><a href="/board/boardList.cls">게시판</a>
 			</ul>
 			<c:if test="${empty sid}">
 			<ul class="nav navbar-nav navbar-right">
@@ -105,10 +185,11 @@
 	<div class="w3-modal" id="detail">
 		<div class="w3-modal-content">
 			<div class="w3-contatiner w3-col w3-white w3-padding">
-			<span id="btn2" class="close">&times;</span>
+			<span id="btn" class="close">&times;</span>
 				<h2 class="w3-col w3-purple w3-padding w3-card">회원 정보</h2>
 				<div class="w3-col w3-border-bottom">
-					<h5 class="w3-col m3">회원번호 : </h5><h5 class="w3-col m9" id="mno"></h5>
+					<h5 class="w3-col m3">회원번호 : </h5>
+					<h5 class="w3-col m9" id="mno"></h5>
 				</div>
 				<div class="w3-col w3-border-bottom">
 					<h5 class="w3-col m3">아 이 디 : </h5>
@@ -118,13 +199,19 @@
 					<h5 class="w3-col m3">회원이름 : </h5>
 					<h5 class="w3-col m9" id="mname"></h5>
 				</div>
-				<div class="w3-col w3-border-bottom">
+				<div class="w3-col w3-border-bottom" id="new_email">
 					<h5 class="w3-col m3">이 메 일 : </h5>
-					<h5 class="w3-col m9" id="mmail"></h5>
+					<h5 class="w3-col m8" id="mmail"></h5>
+					<input class="w3-col m8" type="text" id="newmail" style="display:none;">
+					<button class="w3-col m1" id="modi1">수정</button> 
+					<button class="w3-col m1" id="modi11" style="display:none;">완료</button> 
 				</div>
-				<div class="w3-col w3-border-bottom">
+				<div class="w3-col w3-border-bottom" id="new_tel">
 					<h5 class="w3-col m3">전화번호 : </h5>
-					<h5 class="w3-col m9" id="mtel"></h5>
+					<h5 class="w3-col m8" id="mtel"></h5>
+					<input class="w3-col m8" type="text" id="newtel" style="display:none;">
+					<button class="w3-col m1" id="modi2">수정</button>
+					<button class="w3-col m1" id="modi22" style="display:none;">완료</button>
 				</div>
 				<div class="w3-col w3-border-bottom w3-margin-bottom">
 					<h5 class="w3-col m3">가 입 일 : </h5>

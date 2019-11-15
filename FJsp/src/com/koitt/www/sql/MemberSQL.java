@@ -12,7 +12,12 @@ package com.koitt.www.sql;
 public class MemberSQL {
 	public final int GET_LOGIN = 1001;
 	public final int SEL_MEMB_INFO = 1002;
-	public final int SEL_USER = 1003;
+	public final int MODIFY_MAIL = 1003;
+	public final int MODIFY_TEL = 1004;
+	public final int JOIN = 1005;
+	public final int IDCHECK = 1006;
+	
+	public final int SEL_USER = 0;
 	
 	// 코드를 입력하고 실행하면 질의명령을 반환해주는 함수
 	public String getSQL(int code) {
@@ -30,6 +35,20 @@ public class MemberSQL {
 			buff.append("	member ");
 			buff.append("WHERE ");
 			buff.append("	m_id = ? ");
+			break;
+		case MODIFY_MAIL:
+			buff.append("UPDATE MEMBER SET m_mail = ? WHERE m_id = ?");
+			break;
+		case MODIFY_TEL:
+			buff.append("UPDATE MEMBER SET m_tel = ? WHERE m_id = ?");
+			break;
+		case JOIN:
+			buff.append("INSERT INTO member VALUES( ");
+			buff.append("(SELECT NVL(MAX(M_NO) + 1 , 1001) FROM member), ");
+			buff.append("?, ?, ?, ?, ?, sysdate) ");
+			break;
+		case IDCHECK:
+			buff.append("SELECT count(*) cnt FROM member WHERE m_id = ? ");
 			break;
 		case SEL_USER:
 			buff.append(" SELECT m_id, m_name FROM member ");
